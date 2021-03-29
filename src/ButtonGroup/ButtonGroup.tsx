@@ -10,7 +10,7 @@ export type ButtonGroupProps = {
   gap: number | string;
   /** 버튼 그룹에서 보여줄 버튼들 */
   children: React.ReactNode;
-  /* 스타일 커스터마이징 하고싶을 때 사용 */
+  /** 스타일 커스터마이징 하고싶을 때 사용 */
   className?: string;
 };
 

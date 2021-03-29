@@ -1,11 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/core';
 
-type ButtonProps = {
+export type ButtonProps = {
   /** 버튼 안의 내용 */
   children: React.ReactNode;
-  /** 클릭했을 때 호출할 함수 */
-  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   /** 버튼의 생김새를 설정합니다. */
   theme: 'primary' | 'secondary' | 'tertiary';
   /** 버튼의 크기를 설정합니다. */
@@ -16,6 +14,8 @@ type ButtonProps = {
   width?: string | number;
   /** 버튼에서 아이콘만 보여줄 때 이 값을 `true`로 설정하세요. */
   iconOnly?: boolean;
+  /** 클릭했을 때 호출할 함수 */
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 /** `Button` 컴포넌트는 어떠한 작업을 트리거 할 때 사용합니다.  */
