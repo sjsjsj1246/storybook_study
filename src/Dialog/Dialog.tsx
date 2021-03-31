@@ -3,11 +3,12 @@ import { Fragment } from 'react';
 import { css, jsx } from '@emotion/core';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import Button from '../Button/Button';
+import { useTransition, animated } from 'react-spring';
 
 export type DialogProps = {
+  visible: boolean;
   title?: string;
   description?: string;
-  visible: boolean;
   children?: React.ReactNode;
   hideButtons?: boolean;
   cancellable?: boolean;
@@ -29,28 +30,63 @@ const Dialog = ({
   onCancel,
   onConfirm,
 }: DialogProps) => {
-  if (!visible) return null;
+  const fadeTransition = useTransition(visible, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  });
+
+  const slideUpTransition = useTransition(visible, {
+    from: {
+      transform: `translateY(200px) scale(0.8)`,
+      opacity: 0,
+    },
+    enter: {
+      transform: `translateY(0px) scale(1)`,
+      opacity: 1,
+    },
+    leave: {
+      transform: `translateY(200px) scale(0.8)`,
+      opacity: 0,
+    },
+    config: {
+      tension: 200,
+      friction: 15,
+    },
+  });
 
   return (
     <Fragment>
-      <div css={[fullscreen, darkLayer]}></div>
-      <div css={[fullscreen, whiteBoxWrapper]}>
-        <div css={whiteBox}>
-          {title && <h3>{title}</h3>}
-          {description && <p>{description}</p>}
-          {children}
-          {!hideButtons && (
-            <ButtonGroup css={{ marginTop: '3rem' }} rightAlign>
-              {cancellable && (
-                <Button theme="tertiary" onClick={onCancel}>
-                  {cancelText}
-                </Button>
+      {fadeTransition((style, item) =>
+        item ? (
+          <animated.div
+            css={[fullscreen, darkLayer]}
+            style={style}
+          ></animated.div>
+        ) : null,
+      )}
+
+      {slideUpTransition((style, item) =>
+        item ? (
+          <animated.div css={[fullscreen, whiteBoxWrapper]} style={style}>
+            <div css={whiteBox}>
+              {title && <h3>{title}</h3>}
+              {description && <p>{description}</p>}
+              {children}
+              {!hideButtons && (
+                <ButtonGroup css={{ marginTop: '3rem' }} rightAlign>
+                  {cancellable && (
+                    <Button theme="tertiary" onClick={onCancel}>
+                      {cancelText}
+                    </Button>
+                  )}
+                  <Button onClick={onConfirm}>{confirmText}</Button>
+                </ButtonGroup>
               )}
-              <Button onClick={onConfirm}>{confirmText}</Button>
-            </ButtonGroup>
-          )}
-        </div>
-      </div>
+            </div>
+          </animated.div>
+        ) : null,
+      )}
     </Fragment>
   );
 };

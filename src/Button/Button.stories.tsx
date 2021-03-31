@@ -44,16 +44,28 @@ button.story = {
   name: 'Default',
 };
 
-export const primaryButton = () => {
-  return <Button>PRIMARY</Button>;
+export const primaryButton = (args: ButtonProps) => {
+  return <Button {...args}></Button>;
+};
+primaryButton.args = {
+  children: 'RPIMARY',
+  theme: 'secondary',
 };
 
-export const secondaryButton = () => {
-  return <Button theme="secondary">SECONDARY</Button>;
+export const secondaryButton = (args: ButtonProps) => {
+  return <Button {...args}></Button>;
+};
+secondaryButton.args = {
+  children: 'SECONDARY',
+  theme: 'secondary',
 };
 
-export const tertiaryButton = () => {
-  return <Button theme="tertiary">TERTIARY</Button>;
+export const tertiaryButton = (args: ButtonProps) => {
+  return <Button {...args}></Button>;
+};
+tertiaryButton.args = {
+  children: 'TERTIARY',
+  theme: 'tertiary',
 };
 
 const buttonWrapper = css`
@@ -65,38 +77,46 @@ const buttonWrapper = css`
   }
 `;
 
-export const sizes = () => {
+export const sizes = (args: ButtonProps) => {
   return (
     <div css={buttonWrapper}>
       <div>
         <div className="description">Small</div>
-        <Button size="small">BUTTON</Button>
+        <Button {...args} size="small">
+          BUTTON
+        </Button>
       </div>
       <div>
         <div className="description">Medium</div>
-        <Button size="medium">BUTTON</Button>
+        <Button {...args} size="medium">
+          BUTTON
+        </Button>
       </div>
       <div>
         <div className="description">Big</div>
-        <Button size="big">BUTTON</Button>
+        <Button {...args} size="big">
+          BUTTON
+        </Button>
       </div>
     </div>
   );
 };
 
-export const disabled = () => {
+export const disabled = (args: ButtonProps) => {
   return (
     <div css={buttonWrapper}>
       <div>
-        <Button disabled>PRIMARY</Button>
+        <Button {...args} disabled>
+          PRIMARY
+        </Button>
       </div>
       <div>
-        <Button disabled theme="secondary">
+        <Button {...args} disabled theme="secondary">
           SECONDARY
         </Button>
       </div>
       <div>
-        <Button disabled theme="tertiary">
+        <Button {...args} disabled theme="tertiary">
           TERTIARY
         </Button>
       </div>
@@ -104,30 +124,34 @@ export const disabled = () => {
   );
 };
 
-export const customSized = () => {
+export const customSized = (args: ButtonProps) => {
   return (
     <div css={buttonWrapper}>
       <div>
-        <Button width="20rem">CUSTOM WIDTH</Button>
+        <Button {...args} width="20rem">
+          CUSTOM WIDTH
+        </Button>
       </div>
       <div>
-        <Button width="100%">FULL WIDTH</Button>
+        <Button {...args} width="100%">
+          FULL WIDTH
+        </Button>
       </div>
     </div>
   );
 };
 
-export const withIcon = () => {
+export const withIcon = (args: ButtonProps) => {
   return (
     <div>
       <ButtonGroup>
-        <Button size="small">
+        <Button {...args} size="small">
           <Icon icon="heart" /> LIKE
         </Button>
-        <Button>
+        <Button {...args}>
           <Icon icon="heart" /> LIKE
         </Button>
-        <Button size="big">
+        <Button {...args} size="big">
           <Icon icon="heart" /> LIKE
         </Button>
       </ButtonGroup>
@@ -135,17 +159,17 @@ export const withIcon = () => {
   );
 };
 
-export const iconOnly = () => {
+export const iconOnly = (args: ButtonProps) => {
   return (
     <div>
       <ButtonGroup>
-        <Button iconOnly size="small">
+        <Button {...args} iconOnly size="small">
           <Icon icon="heart" />
         </Button>
-        <Button iconOnly>
+        <Button {...args} iconOnly>
           <Icon icon="heart" />
         </Button>
-        <Button iconOnly size="big">
+        <Button {...args} iconOnly size="big">
           <Icon icon="heart" />
         </Button>
       </ButtonGroup>
